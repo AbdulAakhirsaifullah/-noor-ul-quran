@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+.dark {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-paper text-ink dark:bg-night dark:text-white transition-colors duration-300;
+}
+
+/* Arabic ayah text — generous line height for readability across ages */
+.ayah-arabic {
+  font-family: var(--font-amiri), "Traditional Arabic", serif;
+  line-height: 2.6;
+  letter-spacing: 0.01em;
+}
+
+/* Elder Mode: bumps base font size and spacing app-wide */
+.elder-mode {
+  font-size: 120%;
+}
+.elder-mode .ayah-arabic {
+  line-height: 3;
+}
+
+/* Focus visibility for accessibility */
+:focus-visible {
+  outline: 2px solid #B8923F;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

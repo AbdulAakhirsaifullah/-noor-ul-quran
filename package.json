@@ -1,0 +1,52 @@
+{
+  "name": "noor-ul-quran",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Abdul Aakhir Saifullah",
+  "description": "Noor-ul-Quran — a complete Islamic Quran web platform (Quran, Namaz, Duas, Prayer Times, Qibla, Tasbeeh and more)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "ts-node prisma/seed.ts",
+    "db:studio": "prisma studio",
+    "server:dev": "nodemon server/index.js",
+    "server:start": "node server/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "5.17.0",
+    "@types/node": "20.14.11",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "autoprefixer": "10.4.19",
+    "bcryptjs": "2.4.3",
+    "clsx": "2.1.1",
+    "framer-motion": "11.3.8",
+    "lucide-react": "0.408.0",
+    "next": "14.2.5",
+    "next-auth": "4.24.7",
+    "next-pwa": "5.6.0",
+    "postcss": "8.4.39",
+    "prisma": "5.17.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "swr": "2.2.5",
+    "tailwindcss": "3.4.6",
+    "typescript": "5.5.4",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.5",
+    "nodemon": "3.1.4",
+    "ts-node": "10.9.2"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  }
+}

@@ -1,0 +1,100 @@
+[
+  {
+    "order": 1,
+    "title": "Takbeer (Opening)",
+    "arabic": "اللَّهُ أَكْبَرُ",
+    "urdu": "اللہ سب سے بڑا ہے",
+    "english": "Allah is the Greatest."
+  },
+  {
+    "order": 2,
+    "title": "Sana (Opening Supplication)",
+    "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَٰهَ غَيْرُكَ",
+    "urdu": "پاک ہے تو اے اللہ اور تیرے ساتھ ہی تعریف ہے، اور بابرکت ہے تیرا نام، اور بلند ہے تیری شان، اور تیرے سوا کوئی معبود نہیں",
+    "english": "Glory is to You, O Allah, and praise. Blessed is Your name, and exalted is Your majesty. There is no god but You."
+  },
+  {
+    "order": 3,
+    "title": "Ta'awwuz",
+    "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+    "urdu": "میں اللہ کی پناہ مانگتا ہوں شیطان مردود سے",
+    "english": "I seek refuge in Allah from Satan, the accursed."
+  },
+  {
+    "order": 4,
+    "title": "Tasmiyah",
+    "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+    "urdu": "اللہ کے نام سے جو نہایت مہربان، رحم کرنے والا ہے",
+    "english": "In the name of Allah, the Most Gracious, the Most Merciful."
+  },
+  {
+    "order": 5,
+    "title": "Surah Al-Fatiha",
+    "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾",
+    "urdu": "تمام تعریفیں اللہ کے لیے ہیں جو تمام جہانوں کا رب ہے۔ نہایت مہربان، رحم کرنے والا۔ روزِ جزا کا مالک۔ ہم تیری ہی عبادت کرتے ہیں اور تجھی سے مدد مانگتے ہیں۔ ہمیں سیدھا راستہ دکھا۔ ان لوگوں کا راستہ جن پر تو نے انعام کیا، نہ ان کا جن پر غضب کیا گیا اور نہ گمراہوں کا۔",
+    "english": "All praise is due to Allah, Lord of the worlds. The Most Gracious, the Most Merciful. Master of the Day of Judgment. It is You we worship and You we ask for help. Guide us to the straight path, the path of those upon whom You have bestowed favor, not of those who have earned Your anger or of those who are astray."
+  },
+  {
+    "order": 6,
+    "title": "Ruku Tasbeeh",
+    "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+    "urdu": "پاک ہے میرا رب جو بہت بڑا ہے",
+    "english": "Glory is to my Lord, the Most Great. (recited 3 times)"
+  },
+  {
+    "order": 7,
+    "title": "Qaumah (Rising from Ruku)",
+    "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ، رَبَّنَا وَلَكَ الْحَمْدُ",
+    "urdu": "اللہ نے سن لیا اس کی جس نے اس کی تعریف کی، اے ہمارے رب تیرے ہی لیے تمام تعریفیں ہیں",
+    "english": "Allah hears whoever praises Him. Our Lord, to You belongs all praise."
+  },
+  {
+    "order": 8,
+    "title": "Sajdah Tasbeeh",
+    "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+    "urdu": "پاک ہے میرا رب جو سب سے بلند ہے",
+    "english": "Glory is to my Lord, the Most High. (recited 3 times)"
+  },
+  {
+    "order": 9,
+    "title": "Jalsa Dua (Sitting Between Two Prostrations)",
+    "arabic": "رَبِّ اغْفِرْ لِي، رَبِّ اغْفِرْ لِي",
+    "urdu": "اے میرے رب! مجھے بخش دے، اے میرے رب! مجھے بخش دے",
+    "english": "My Lord, forgive me. My Lord, forgive me."
+  },
+  {
+    "order": 10,
+    "title": "Second Sajdah",
+    "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَى",
+    "urdu": "پاک ہے میرا رب جو سب سے بلند ہے",
+    "english": "Glory is to my Lord, the Most High. (recited 3 times)"
+  },
+  {
+    "order": 11,
+    "title": "Tashahhud",
+    "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+    "urdu": "تمام قولی، بدنی اور مالی عبادتیں اللہ کے لیے ہیں، اے نبی! آپ پر سلامتی ہو اور اللہ کی رحمت اور اس کی برکتیں، ہم پر اور اللہ کے نیک بندوں پر سلامتی ہو، میں گواہی دیتا ہوں کہ اللہ کے سوا کوئی معبود نہیں اور میں گواہی دیتا ہوں کہ محمد اس کے بندے اور رسول ہیں",
+    "english": "All greetings, prayers, and good deeds are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings. Peace be upon us and upon the righteous servants of Allah. I bear witness that there is no god but Allah, and I bear witness that Muhammad is His servant and Messenger."
+  },
+  {
+    "order": 12,
+    "title": "Darood Ibrahim",
+    "arabic": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "urdu": "اے اللہ! محمد پر اور محمد کی آل پر رحمت نازل فرما جیسا کہ تو نے ابراہیم پر اور ابراہیم کی آل پر رحمت نازل فرمائی، بے شک تو تعریف کیا گیا، بزرگی والا ہے",
+    "english": "O Allah, send blessings upon Muhammad and upon the family of Muhammad, as You sent blessings upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious."
+  },
+  {
+    "order": 13,
+    "title": "Dua After Darood (Masnoon Dua)",
+    "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+    "urdu": "اے ہمارے رب! ہمیں دنیا میں بھلائی دے اور آخرت میں بھی بھلائی دے اور ہمیں آگ کے عذاب سے بچا",
+    "english": "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire."
+  },
+  {
+    "order": 14,
+    "title": "Salam (Closing)",
+    "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+    "urdu": "تم پر سلامتی ہو اور اللہ کی رحمت",
+    "english": "Peace and the mercy of Allah be upon you. (turning to the right, then the left)"
+  }
+]

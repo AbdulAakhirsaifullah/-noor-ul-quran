@@ -1,0 +1,360 @@
+// ============================================================
+// Noor-ul-Quran — Prisma Schema
+// Database: PostgreSQL
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------
+// AUTH & USERS
+// ------------------------------------------------------------
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?   // null when using OAuth
+  image         String?
+  role          Role      @default(USER)
+
+  // Preferences
+  language        String  @default("en") // en | ur | ar
+  theme           String  @default("light") // light | dark
+  arabicFontSize  Int     @default(28)
+  translationOn   Boolean @default(true)
+  tafsirOn        Boolean @default(false)
+  audioSpeed      Float   @default(1.0)
+  autoScroll      Boolean @default(true)
+  favoriteReciter String  @default("mishary_rashid")
+
+  bookmarks       Bookmark[]
+  notes           Note[]
+  tasbeehCounts   TasbeehCount[]
+  readingProgress ReadingProgress[]
+  readingGoals    ReadingGoal[]
+  accounts        Account[]
+  sessions        Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// NextAuth required models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ------------------------------------------------------------
+// QURAN CORE
+// ------------------------------------------------------------
+
+model Surah {
+  id               Int      @id // 1-114
+  nameArabic       String
+  nameEnglish      String
+  nameTranslation  String   // English meaning, e.g. "The Opening"
+  revelationPlace  String   // Meccan | Medinan
+  revelationOrder  Int
+  totalAyahs       Int
+  siparahStart     Int      // which Juz/Para it starts in
+  bismillahPresent Boolean  @default(true)
+
+  ayahs   Ayah[]
+  tafsirs Tafsir[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("surahs")
+}
+
+model Ayah {
+  id              String  @id @default(cuid())
+  surahId         Int
+  numberInSurah   Int
+  numberInQuran   Int     @unique // 1-6236 global ayah index
+  siparahNumber   Int     // 1-30
+  rukuNumber      Int?
+  pageNumber      Int?
+  textArabic      String  @db.Text
+  textUthmani     String? @db.Text // Uthmani script variant for tajweed rendering
+  translationUrdu String? @db.Text
+  translationEnglish String? @db.Text
+  wordByWord      Json?   // [{ arabic, urdu, english }]
+  audioUrl        String? // default reciter audio for this ayah
+  sajdah          Boolean @default(false)
+
+  surah     Surah      @relation(fields: [surahId], references: [id])
+  tafsirs   Tafsir[]
+  bookmarks Bookmark[]
+  notes     Note[]
+
+  @@unique([surahId, numberInSurah])
+  @@index([siparahNumber])
+  @@map("ayahs")
+}
+
+model Tafsir {
+  id        String  @id @default(cuid())
+  ayahId    String
+  surahId   Int
+  source    String  // e.g. "Ibn Kathir", "Tafsir al-Jalalayn"
+  language  String  @default("en")
+  content   String  @db.Text
+
+  ayah  Ayah  @relation(fields: [ayahId], references: [id])
+  surah Surah @relation(fields: [surahId], references: [id])
+
+  @@map("tafsirs")
+}
+
+model Reciter {
+  id        String @id @default(cuid())
+  key       String @unique // e.g. "mishary_rashid"
+  name      String
+  style     String? // Murattal | Mujawwad
+  audioBaseUrl String
+
+  @@map("reciters")
+}
+
+// ------------------------------------------------------------
+// USER INTERACTION
+// ------------------------------------------------------------
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  ayahId    String?
+  surahId   Int?
+  siparahNumber Int?
+  label     String?
+  createdAt DateTime @default(now())
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ayah Ayah? @relation(fields: [ayahId], references: [id])
+
+  @@map("bookmarks")
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  userId    String
+  ayahId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ayah Ayah @relation(fields: [ayahId], references: [id])
+
+  @@map("notes")
+}
+
+model ReadingProgress {
+  id             String   @id @default(cuid())
+  userId         String
+  surahId        Int
+  lastAyahNumber Int
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, surahId])
+  @@map("reading_progress")
+}
+
+model ReadingGoal {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   // "pages_per_day" | "siparah_per_day" | "khatm_by_date"
+  target      Int
+  currentDay  Int      @default(0)
+  streak      Int      @default(0)
+  startedAt   DateTime @default(now())
+  targetDate  DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("reading_goals")
+}
+
+model TasbeehCount {
+  id        String   @id @default(cuid())
+  userId    String
+  zikrName  String   // e.g. "SubhanAllah"
+  count     Int      @default(0)
+  targetCount Int?
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, zikrName])
+  @@map("tasbeeh_counts")
+}
+
+// ------------------------------------------------------------
+// CONTENT: DUAS, NAMES, NAMAZ, HADITH, ARTICLES
+// ------------------------------------------------------------
+
+model Dua {
+  id          String @id @default(cuid())
+  category    String // Morning | Evening | Sleeping | Travel | Istikhara | ...
+  title       String
+  arabic      String @db.Text
+  transliteration String @db.Text
+  urdu        String @db.Text
+  english     String @db.Text
+  meaning     String? @db.Text
+  reference   String? // source, e.g. "Sahih al-Bukhari 6320"
+  audioUrl    String?
+  order       Int     @default(0)
+
+  @@index([category])
+  @@map("duas")
+}
+
+model NameOfAllah {
+  id          String @id @default(cuid())
+  number      Int    @unique // 1-99
+  arabic      String
+  transliteration String
+  meaningEnglish String
+  meaningUrdu String
+  benefits    String? @db.Text
+  audioUrl    String?
+
+  @@map("names_of_allah")
+}
+
+model NamazStep {
+  id        String @id @default(cuid())
+  order     Int    @unique // sequence within salah
+  title     String // e.g. "Ruku Dua", "Tashahhud"
+  arabic    String @db.Text
+  urdu      String @db.Text
+  english   String @db.Text
+  audioUrl  String?
+
+  @@map("namaz_steps")
+}
+
+model SmallSurah {
+  id          String @id @default(cuid())
+  surahId     Int    @unique
+  arabic      String @db.Text
+  transliteration String @db.Text
+  translationUrdu String @db.Text
+  translationEnglish String @db.Text
+  audioUrl    String?
+
+  @@map("small_surahs")
+}
+
+model Hadith {
+  id         String @id @default(cuid())
+  collection String // Sahih al-Bukhari | Sahih Muslim | ...
+  bookNumber String?
+  hadithNumber String?
+  arabic     String? @db.Text
+  english    String  @db.Text
+  urdu       String? @db.Text
+  narrator   String?
+  grade      String? // Sahih | Hasan | Da'if (only verified sources)
+
+  @@map("hadiths")
+}
+
+model Article {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  excerpt   String?
+  content   String   @db.Text
+  coverImage String?
+  authorId  String?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("articles")
+}
+
+// ------------------------------------------------------------
+// ISLAMIC CALENDAR / RAMADAN
+// ------------------------------------------------------------
+
+model IslamicEvent {
+  id          String   @id @default(cuid())
+  title       String
+  hijriDate   String   // e.g. "1 Ramadan"
+  description String?  @db.Text
+  category    String   // Ramadan | Eid | Ashura | Rabi-ul-Awwal | ...
+
+  @@map("islamic_events")
+}
+
+// ------------------------------------------------------------
+// ANALYTICS (lightweight, for Admin Dashboard)
+// ------------------------------------------------------------
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  eventType String   // "surah_view" | "audio_play" | "search" | ...
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([eventType, createdAt])
+  @@map("analytics_events")
+}

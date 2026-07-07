@@ -1,0 +1,29 @@
+{
+  "name": "noor-ul-quran-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional standalone Express API for Noor-ul-Quran (deployable separately on Railway/Render, shares the same Postgres DB via Prisma).",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "4.19.2",
+    "cors": "2.8.5",
+    "helmet": "7.1.0",
+    "express-rate-limit": "7.3.1",
+    "dotenv": "16.4.5",
+    "bcryptjs": "2.4.3",
+    "jsonwebtoken": "9.0.2",
+    "zod": "3.23.8",
+    "@prisma/client": "5.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.4",
+    "prisma": "5.17.0"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  }
+}
