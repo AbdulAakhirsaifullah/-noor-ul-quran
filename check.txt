@@ -46,11 +46,3 @@ export function audioUrlFor(reciterKey: string, ayahNumberInQuran: number) {
   const edition = reciterMap[reciterKey] ?? "ar.alafasy";
   return `https://cdn.islamic.network/quran/audio/128/${edition}/${ayahNumberInQuran}.mp3`;
 }
-export async function getJuz(juzNumber: number, editions: string[] = ["quran-uthmani", "en.sahih", "ur.jalandhry"]) {
-  const res = await fetch(`${BASE}/juz/${juzNumber}/editions/${editions.join(",")}`, {
-    next: { revalidate: 60 * 60 * 24 },
-  });
-  if (!res.ok) throw new Error(`Failed to fetch juz ${juzNumber}`);
-  const json = await res.json();
-  return json.data;
-}
