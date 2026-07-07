@@ -6,7 +6,7 @@
   "description": "Noor-ul-Quran — a complete Islamic Quran web platform (Quran, Namaz, Duas, Prayer Times, Qibla, Tasbeeh and more)",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+   "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
